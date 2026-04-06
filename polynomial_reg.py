@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 from sklearn.pipeline import make_pipeline
+from sklearn.metrics import mean_squared_error, r2_score
 
 # ------------------- Step 1: Create sample data -------------------
 # Generate synthetic data to demonstrate polynomial regression
@@ -46,7 +47,13 @@ model = make_pipeline(
 # Train (fit) the model on our data X and y
 model.fit(X, y)
 
-# ------------------- Step 4: Make predictions on new data -------------------
+# ------------------- Step 4: Evaluate on training data -------------------
+# Use the model to predict the same training points and compute error metrics
+y_pred_train = model.predict(X)
+print("MSE:", mean_squared_error(y, y_pred_train))
+print("R² Score:", r2_score(y, y_pred_train))
+
+# ------------------- Step 5: Make predictions on new data -------------------
 # Create a denser set of test points for smooth plotting (200 points instead of 50)
 X_test = np.linspace(-3, 3, 200).reshape(-1, 1)
 
